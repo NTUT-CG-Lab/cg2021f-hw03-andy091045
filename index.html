@@ -121,28 +121,28 @@
       let RLeye;
       //R:移動 R:右邊 X:座標X
       let r1 = {
+        rx: -8,
+        ry: 0,
+        lx: -8,
+        ly: 0,
+      };
+      let r2 = {
+        rx: 11.4,
+        ry: 0,
+        lx: 11.4,
+        ly: 0,
+      };
+      let r3 = {
         rx: 0,
         ry: -8,
         lx: 0,
-        ly: -8,
-      };
-      let r2 = {
-        rx: 0,
-        ry: 11.4,
-        lx: 0,
-        ly: 11.4,
-      };
-      let r3 = {
-        rx: -8,
-        ry: 0,
-        lx: -12.6,
-        ly: 0,
+        ly: -12.6,
       };
       let r4 = {
-        rx: 12.6,
-        ry: 0,
-        lx: 8,
-        ly: 0,
+        rx: 0,
+        ry: 12.6,
+        lx: 0,
+        ly: 8,
       };
 
       let RRX = 0;
@@ -432,22 +432,28 @@
           RLeye = "R";
           eyeCount++;
           MirrorEye();
-        } else if (e.key == "q" || e.key == "Q") {
-          if (RLeye == "R") {
-            mesh.skeleton.bones[lEyeIndex].rotation.x =
-              mesh.skeleton.bones[rEyeIndex].rotation.x;
-
-            mesh.skeleton.bones[lEyeIndex].rotation.y =
-              -mesh.skeleton.bones[rEyeIndex].rotation.y;
-          } else if (RLeye == "L") {
-            mesh.skeleton.bones[rEyeIndex].rotation.x =
-              mesh.skeleton.bones[lEyeIndex].rotation.x;
-
-            mesh.skeleton.bones[rEyeIndex].rotation.y =
-              -mesh.skeleton.bones[lEyeIndex].rotation.y;
+          if (eyeCount > 7) {
+            eyeCount = 7;
+            MirrorEye();
           }
-        } else if (e.key == "s" || e.key == "S") {
-          saveJson(modelOrder);
+        } else if (e.key == "q" || e.key == "Q") {
+          if (eyeCount == 0) {
+            r1.lx = r1.rx;
+            r1.ly = -r1.ry;
+            eyeCount++;
+          } else if (eyeCount == 2) {
+            r2.lx = r2.rx;
+            r2.ly = -r2.ry;
+            eyeCount++;
+          } else if (eyeCount == 4) {
+            r4.lx = r3.rx;
+            r4.ly = -r3.ry;
+            eyeCount = 7;
+          } else if (eyeCount == 6) {
+            r3.lx = r4.rx;
+            r3.ly = -r4.ry;
+            eyeCount--;
+          }
         }
       }
 
