@@ -454,6 +454,8 @@
             r3.ly = -r4.ry;
             eyeCount--;
           }
+        } else if (e.key == "s" || e.key == "S") {
+          saveJson(modelOrder);
         }
       }
 
@@ -631,16 +633,16 @@
       function saveJson(modelOrder) {
         let OutputJson = [];
         OutputJson.push({
-          modelName: data[modelOrder].modelPath,
+          modelName: data[modelOrder].location,
           modelEyeRotationAngles: {
-            Right_X_negative_angle: r1.ry,
-            Left_X_negative_angle: r1.ly,
-            Right_X_positive_angle: r2.ry,
-            Left_X_positive_angle: r2.ly,
-            Right_Y_negative_angle: r3.rx,
-            Left_Y_negative_angle: r3.lx,
-            Right_Y_positive_angle: r4.rx,
-            Left_Y_positive_angle: r4.lx,
+            Right_X_negative_angle: r1.rx,
+            Left_X_negative_angle: r1.lx,
+            Right_X_positive_angle: r2.rx,
+            Left_X_positive_angle: r2.lx,
+            Right_Y_negative_angle: r3.ry,
+            Left_Y_negative_angle: r3.ly,
+            Right_Y_positive_angle: r4.ry,
+            Left_Y_positive_angle: r4.ly,
           },
         });
         const a = document.createElement("a");
